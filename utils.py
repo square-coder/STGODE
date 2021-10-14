@@ -8,13 +8,13 @@ import torch
 
 
 files = {
-    'pems03': ['PEMS03/pems03.npy', 'PEMS03/distance.csv'],
-    'pems04': ['PEMS04/pems04.npy', 'PEMS04/distance.csv'],
-    'pems07': ['PEMS07/pems07.npy', 'PEMS07/distance.csv'],
-    'pems08': ['PEMS08/pems08.npy', 'PEMS08/distance.csv'],
-    'pemsbay': ['PEMSBAY/pems_bay.npy', 'PEMSBAY/distance.csv'],
-    'pemsD7M': ['PeMSD7M/PeMSD7M.npy', 'PeMSD7M/distance.csv'],
-    'pemsD7L': ['PeMSD7L/PeMSD7L.npy', 'PeMSD7L/distance.csv']
+    'pems03': ['PEMS03/pems03.npz', 'PEMS03/distance.csv'],
+    'pems04': ['PEMS04/pems04.npz', 'PEMS04/distance.csv'],
+    'pems07': ['PEMS07/pems07.npz', 'PEMS07/distance.csv'],
+    'pems08': ['PEMS08/pems08.npz', 'PEMS08/distance.csv'],
+    'pemsbay': ['PEMSBAY/pems_bay.npz', 'PEMSBAY/distance.csv'],
+    'pemsD7M': ['PeMSD7M/PeMSD7M.npz', 'PeMSD7M/distance.csv'],
+    'pemsD7L': ['PeMSD7L/PeMSD7L.npz', 'PeMSD7L/distance.csv']
 }
 
 def read_data(args):
@@ -36,7 +36,7 @@ def read_data(args):
     filepath = "./data/"
     if args.remote:
         filepath = '/home/lantu.lqq/ftemp/data/'
-    data = np.load(filepath + file[0])
+    data = np.load(filepath + file[0])['data']
     # PEMS04 == shape: (16992, 307, 3)    feature: flow,occupy,speed
     # PEMSD7M == shape: (12672, 228, 1)
     # PEMSD7L == shape: (12672, 1026, 1)
