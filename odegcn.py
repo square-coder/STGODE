@@ -37,12 +37,12 @@ class ODEFunc(nn.Module):
         # ensure the eigenvalues to be less than 1
         d = torch.clamp(self.d, min=0, max=1)
         w = torch.mm(self.w * d, torch.t(self.w))
-        w = (1 + self.beta) * w - self.beta * torch.mm(torch.mm(w, torch.t(w)), w)
+        self.w = (1 + self.beta) * self.w - self.beta * torch.mm(torch.mm(self.w, torch.t(self.w)), self.w)
         xw = torch.einsum('ijkl, lm->ijkm', x, w)
 
         d2 = torch.clamp(self.d2, min=0, max=1)
         w2 = torch.mm(self.w2 * d2, torch.t(self.w2))
-        w2 = (1 + self.beta) * w2 - self.beta * torch.mm(torch.mm(w2, torch.t(w2)), w2)
+        self.w2 = (1 + self.beta) * self.w2 - self.beta * torch.mm(torch.mm(self.w2, torch.t(self.w2)), self.w2)
         xw2 = torch.einsum('ijkl, km->ijml', x, w2)
 
         f = alpha / 2 * xa - x + xw - x + xw2 - x + self.x0
